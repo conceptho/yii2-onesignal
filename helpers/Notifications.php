@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rocketman
- * Date: 23.06.16
- * Time: 14:20
- */
 
-namespace rocketfirm\onesignal\helpers;
+namespace romulo1984\onesignal\helpers;
 
 
 class Notifications extends Request
@@ -57,16 +51,16 @@ class Notifications extends Request
      */
     public function create($contents, $options = [])
     {
-        $result = $this->curl->setOption(
-            CURLOPT_POSTFIELDS, json_encode(
-                array_merge(['contents' => $contents, 'app_id' => $this->appId], $options)
-            )
-        )
-            ->setOption(CURLOPT_POST, true)
-            ->setOption(CURLOPT_RETURNTRANSFER, TRUE)
-            ->post($this->apiBaseUrl . $this->methodName);
+        // $result = $this->curl->setOption(
+        //     CURLOPT_POSTFIELDS, json_encode(
+        //         array_merge(['contents' => $contents, 'app_id' => $this->appId], $options)
+        //     )
+        // )
+        //     ->setOption(CURLOPT_POST, true)
+        //     ->setOption(CURLOPT_RETURNTRANSFER, TRUE)
+        //     ->post($this->apiBaseUrl . $this->methodName);
 
-        $result = json_decode($result, true);
+        // $result = json_decode($result, true);
 
         return $result;
     }
@@ -78,9 +72,9 @@ class Notifications extends Request
      */
     public function cancel($id)
     {
-        $result = $this->curl->delete(
-            $this->apiBaseUrl . $this->methodName . "/{$id}?app_id={$this->appId}"
-        );
+        // $result = $this->curl->delete(
+        //     $this->apiBaseUrl . $this->methodName . "/{$id}?app_id={$this->appId}"
+        // );
 
         return json_decode($result);
     }

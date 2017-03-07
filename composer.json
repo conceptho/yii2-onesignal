@@ -1,16 +1,16 @@
 {
-    "name": "rocketfirm/yii2-onesignal",
+    "name": "romulo1984/yii2-onesignal",
     "description": "Yii2 component for OneSignal.com integration",
     "type": "library",
     "require": {
         "yiisoft/yii2": "^2.0",
-        "linslin/yii2-curl" : "^1.0.8"
+        "guzzlehttp/guzzle" : "~6.0"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "naffiq",
-            "email": "galymzhan@rocketfirm.com"
+            "name": "Rômulo",
+            "email": "romulo1984@gmail.com"
         }
     ],
     "autoload": {

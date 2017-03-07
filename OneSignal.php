@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rocketman
- * Date: 23.06.16
- * Time: 12:39
- */
 
-namespace rocketfirm\onesignal;
+namespace romulo1984\onesignal;
 
 
-use rocketfirm\onesignal\helpers\Notifications;
-use rocketfirm\onesignal\helpers\Player;
+use romulo1984\onesignal\helpers\Notifications;
+use romulo1984\onesignal\helpers\Player;
 use yii\base\Component;
 use yii\base\Exception;
 

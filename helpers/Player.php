@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rocketman
- * Date: 23.06.16
- * Time: 14:20
- */
 
-namespace rocketfirm\onesignal\helpers;
+namespace romulo1984\onesignal\helpers;
 
 
 use yii\base\Exception;
@@ -16,7 +10,7 @@ use yii\base\Exception;
  *
  * Used for interactions with users api
  *
- * @package rocketfirm\onesignal\helpers
+ * @package romulo1984\onesignal\helpers
  */
 class Player extends Request
 {
@@ -55,20 +49,20 @@ class Player extends Request
      */
     public function add($deviceType, $options = [])
     {
-        $result = $this->curl->setOption(
-            CURLOPT_POSTFIELDS, json_encode(
-                array_merge($options, ['device_type' => $deviceType, 'app_id' => $this->appId])
-            )
-        )
-            ->setOption(CURLOPT_POST, true)
-            ->setOption(CURLOPT_RETURNTRANSFER, TRUE)
-            ->post($this->apiBaseUrl . $this->methodName);
+        // $result = $this->curl->setOption(
+        //     CURLOPT_POSTFIELDS, json_encode(
+        //         array_merge($options, ['device_type' => $deviceType, 'app_id' => $this->appId])
+        //     )
+        // )
+        //     ->setOption(CURLOPT_POST, true)
+        //     ->setOption(CURLOPT_RETURNTRANSFER, TRUE)
+        //     ->post($this->apiBaseUrl . $this->methodName);
 
-        $result = json_decode($result, true);
+        // $result = json_decode($result, true);
 
-        if ($result['success'] == true) {
-            return $result['id'];
-        }
+        // if ($result['success'] == true) {
+        //     return $result['id'];
+        // }
 
         return false;
     }
@@ -87,13 +81,13 @@ class Player extends Request
             throw new Exception('ID of player is not defined');
         }
 
-        $result = $this->curl->setOption(
-            CURLOPT_POSTFIELDS, json_encode(
-                $options
-            )
-        )->put($this->apiBaseUrl . $this->methodName . '/' . $this->id);
+        // $result = $this->curl->setOption(
+        //     CURLOPT_POSTFIELDS, json_encode(
+        //         $options
+        //     )
+        // )->put($this->apiBaseUrl . $this->methodName . '/' . $this->id);
 
-        $result = json_decode($result, true);
+        // $result = json_decode($result, true);
 
         return $result['success'];
     }

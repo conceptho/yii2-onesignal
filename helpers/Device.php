@@ -1,19 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: naffiq
- * Date: 11/23/2016
- * Time: 7:17 PM
- */
 
-namespace rocketfirm\onesignal\helpers;
+namespace romulo1984\onesignal\helpers;
 
 /**
  * Class Device
  *
  * Contains device types to be used for [[Notifications]] and [[Player]] models
  *
- * @package rocketfirm\onesignal\helpers
+ * @package romulo1984\onesignal\helpers
  */
 class Device
 {

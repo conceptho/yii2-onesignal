@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rocketman
- * Date: 23.06.16
- * Time: 14:19
- */
 
-namespace rocketfirm\onesignal\helpers;
+namespace romulo1984\onesignal\helpers;
 
 
 use linslin\yii2\curl\Curl;
@@ -51,12 +45,12 @@ class Request extends Object
      */
     public function init()
     {
-        $this->curl = (new Curl())->setOption(
-            CURLOPT_HTTPHEADER, [
-                'Authorization: Basic ' . $this->apiKey,
-                'Content-Type: application/json'
-            ]
-        );
+        // $this->curl = (new Curl())->setOption(
+        //     CURLOPT_HTTPHEADER, [
+        //         'Authorization: Basic ' . $this->apiKey,
+        //         'Content-Type: application/json'
+        //     ]
+        // );
 
     }
 }
