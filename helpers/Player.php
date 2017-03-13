@@ -2,103 +2,54 @@
 
 namespace romulo1984\onesignal\helpers;
 
-
 use yii\base\Exception;
+use yii\helpers\ArrayHelper;
 
-/**
- * Class Player
- *
- * Used for interactions with users api
- *
- * @package romulo1984\onesignal\helpers
- */
 class Player extends Request
 {
     public $id;
     public $methodName = 'players';
+    public $endpoint = 'players';
 
-    /**
-     * Gets all the devices. Not recommended for apps with 10 000 + devices
-     *
-     * @return array
-     */
-    public function view()
+    public function getAll($limit = null, $offset = null)
     {
-        return json_decode($this->curl
-            ->get($this->apiBaseUrl . $this->methodName . '?app_id=' . $this->appId));
+        $response = $this->client->request(
+            'GET', $this->endpoint,
+            ['query' => [
+                'app_id' => $this->appId,
+                'limit' => $limit,
+                'offset' => $offset
+            ]]
+        );
+
+        return json_decode($response->getBody(), true);
     }
 
-    /**
-     * Adds device to player
-     *
-     * @param int   $deviceType 0 = iOS,
-     *                          1 = Android,
-     *                          2 = Amazon,
-     *                          3 = WindowsPhone(MPNS),
-     *                          4 = ChromeApp,
-     *                          5 = ChromeWebsite,
-     *                          6 = WindowsPhone(WNS),
-     *                          7 = Safari,
-     *                          8 = Firefox,
-     *                          9 = Mac OS X
-     *
-     * @param array $options    Additional options can be found at OneSignal docs page
-     *                          https://documentation.onesignal.com/docs/players-add-a-device
-     *
-     * @return bool|string
-     */
-    public function add($deviceType, $options = [])
+    public function getOne()
     {
-        // $result = $this->curl->setOption(
-        //     CURLOPT_POSTFIELDS, json_encode(
-        //         array_merge($options, ['device_type' => $deviceType, 'app_id' => $this->appId])
-        //     )
-        // )
-        //     ->setOption(CURLOPT_POST, true)
-        //     ->setOption(CURLOPT_RETURNTRANSFER, TRUE)
-        //     ->post($this->apiBaseUrl . $this->methodName);
+        $response = $this->client->request(
+            'GET', $this->endpoint . '/' . $this->id,
+            ['query' => [
+                'app_id' => $this->appId
+            ]]
+        );
 
-        // $result = json_decode($result, true);
-
-        // if ($result['success'] == true) {
-        //     return $result['id'];
-        // }
-
-        return false;
+        return json_decode($response->getBody(), true);
     }
 
-    /**
-     * Edit player info
-     * @param  array $options Parameters to edit.
-     * Visit [onesignal.com](https://documentation.onesignal.com/) for more details.
-     * @return boolean returns true if edition is successfully done
-     *
-     * @throws Exception
-     */
-    public function edit($options)
+    public function edit(Array $options = null)
     {
-        if (!$this->id) {
+        if (!$this->id)
             throw new Exception('ID of player is not defined');
-        }
 
-        // $result = $this->curl->setOption(
-        //     CURLOPT_POSTFIELDS, json_encode(
-        //         $options
-        //     )
-        // )->put($this->apiBaseUrl . $this->methodName . '/' . $this->id);
+        $response = $this->client->request(
+            'PUT', $this->endpoint . '/' . $this->id,
+            ['form_params' => ArrayHelper::merge($options, ['app_id' => $this->appId])]
+        );
 
-        // $result = json_decode($result, true);
-
-        return $result['success'];
+        return json_decode($response->getBody(), true);
     }
 
-    /**
-     * Adds tag to selected player
-     * @param array|string  $tagName  Tags to be added
-     * @param boolean $tagValue returns true if edition is successfully done
-     *
-     * @return bool|mixed
-     */
     public function addTag($tagName, $tagValue = true)
     {
         if (is_array($tagName)) {
@@ -108,12 +59,6 @@ class Player extends Request
         }
     }
 
-    /**
-     * Removes tags from player
-     * @param  array|string  $tagName  Tag to be removed
-     *
-     * @return bool|mixed
-     */
     public function removeTag($tagName)
     {
         return $this->addTag($tagName, '');

@@ -2,23 +2,17 @@
 
 namespace romulo1984\onesignal;
 
-
 use romulo1984\onesignal\helpers\Notifications;
 use romulo1984\onesignal\helpers\Player;
 use yii\base\Component;
 use yii\base\Exception;
+use yii\helpers\ArrayHelper;
 
 class OneSignal extends Component
 {
     public $appId;
     public $apiKey;
 
-    /**
-     * Initializing OneSignal component
-     *
-     * @return void
-     * @throws Exception
-     */
     public function init()
     {
         if (empty($this->appId)) {
@@ -30,37 +24,21 @@ class OneSignal extends Component
         }
     }
 
-    /**
-     * Work with player API
-     *
-     * @param bool|int $id ID of player to edit/view
-     *                     or false for common methods
-     *
-     * @return Player
-     */
-    public function players($id = false)
+    private function config()
     {
-        $player = new Player(
-            ['appId' => $this->appId, 'apiKey' => $this->apiKey, 'id' => $id]
-        );
-
-        return $player;
+        return [
+            'appId' => $this->appId,
+            'apiKey' => $this->apiKey
+        ];
     }
 
-    /**
-     * Work with notifications API
-     *
-     * @param bool|int $id ID of notification to edit/view
-     *                     or false for common methods
-     *
-     * @return Notifications
-     */
+    public function players($id = false)
+    {
+        return new Player(ArrayHelper::merge($this->config(), ['id' => $id]));
+    }
+
     public function notifications($id = false)
     {
-        $notification = new Notifications(
-            ['appId' => $this->appId, 'apiKey' => $this->apiKey, 'id' => $id]
-        );
-
-        return $notification;
+        return new Notifications(ArrayHelper::merge($this->config(), ['id' => $id]));
     }
 }
