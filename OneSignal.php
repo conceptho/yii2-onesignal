@@ -2,7 +2,7 @@
 
 namespace romulo1984\onesignal;
 
-use romulo1984\onesignal\helpers\Notifications;
+use romulo1984\onesignal\helpers\Notification;
 use romulo1984\onesignal\helpers\Player;
 use yii\base\Component;
 use yii\base\Exception;
@@ -39,6 +39,6 @@ class OneSignal extends Component
 
     public function notifications($id = false)
     {
-        return new Notifications(ArrayHelper::merge($this->config(), ['id' => $id]));
+        return new Notification(ArrayHelper::merge($this->config(), ['id' => $id]));
     }
 }

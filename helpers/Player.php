@@ -11,15 +11,13 @@ class Player extends Request
     public $methodName = 'players';
     public $endpoint = 'players';
 
-    public function getAll($limit = null, $offset = null)
+    public function getAll($params = null)
     {
+        $query = ArrayHelper::merge($params, ['app_id' => $this->appId]);
+
         $response = $this->client->request(
             'GET', $this->endpoint,
-            ['query' => [
-                'app_id' => $this->appId,
-                'limit' => $limit,
-                'offset' => $offset
-            ]]
+            ['query' => $query]
         );
 
         return json_decode($response->getBody(), true);
