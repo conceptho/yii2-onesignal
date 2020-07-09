@@ -1,5 +1,5 @@
 {
-    "name": "romulo1984/yii2-onesignal",
+    "name": "conceptho/yii2-onesignal",
     "description": "Yii2 component for OneSignal.com integration",
     "type": "library",
     "require": {
@@ -15,6 +15,7 @@
     ],
     "autoload": {
         "psr-4": {
+            "conceptho\\onesignal\\": "",
             "romulo1984\\onesignal\\": "",
             "romulo1984\\onesignal\\helpers\\": "helpers"
         }
